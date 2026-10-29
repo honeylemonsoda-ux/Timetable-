@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8e8f0">
+<title>Study♡Room</title>
+<style>
+:root{--pink:#f5dce8;--pink2:#fbeef4;--pink3:#e8a9c8;--ink:#76536a;--muted:#a48b9b;--line:#ead8e2;--bg:#fffafd;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:760px;margin:auto;padding:14px 13px 90px}
+header{background:linear-gradient(135deg,#fbeaf2,#f4dce8);border:1px solid #f0d9e5;border-radius:24px;padding:17px;margin-bottom:13px}
+.brand{display:flex;align-items:center;gap:13px}.brand h1{font-size:25px;margin:0;color:#75455e;letter-spacing:.2px}.sub{font-size:12px;color:#98778a;margin-top:5px}
+.avatar{width:76px;height:76px;flex:0 0 76px;border-radius:20px;background:#fff8fc;border:1px dashed #d9a7c1;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#c17ba0;font-size:11px;text-align:center;position:relative}
+.avatar img{width:100%;height:100%;object-fit:cover}.avatar input{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px}.date{width:100%;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.progress{background:#fff9fc;border:1px solid #ecd6e2;border-radius:17px;padding:12px;margin-top:13px}.progressline{display:flex;align-items:center;justify-content:space-between}.percent{font-size:27px;font-weight:800;color:#c15e91}.hearts{display:flex;gap:3px;margin-top:8px}.heart{font-size:20px;color:#d8bfcd;line-height:1}.heart.on{color:#e875aa}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:13px 0}.navbtn{border:1px solid var(--line);border-radius:13px;background:#fff;padding:10px 3px;color:#98788c;font-size:12px}.navbtn.active{background:#eec8db;color:#75455e;border-color:#e5b5ce;font-weight:700}
+.page{display:none}.page.active{display:block}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:15px 2px 10px}.sectionhead h2{font-size:19px;margin:0;color:#75455e}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin:6px 2px 12px}
+.btn{border:1px solid var(--line);border-radius:12px;padding:10px 13px;background:#fff;color:#80556e}.btn.primary{background:#e9b9d0;border-color:#e9b9d0;color:#70455e;font-weight:700}.btn.small{padding:7px 9px;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.slot{background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px;margin-bottom:9px}.slothead{display:flex;align-items:center;gap:9px;margin-bottom:8px}.timepill{background:#f8e8f0;border-radius:9px;padding:8px 7px;font-size:13px;font-weight:700;white-space:nowrap;min-width:68px;text-align:center}.slothead .subject{flex:1;min-width:0}.slot input[type=text],.slot select,.field{width:100%;min-width:0;border:1px solid #eadce4;background:#fffdfd;border-radius:10px;padding:10px;color:var(--ink);outline-color:#dfa5c2}.slot input[type=text]{margin-bottom:7px}.donecheck{width:21px;height:21px;accent-color:#dc78a7}.slotfoot{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#a48b9b}
+.timeline{position:relative}.trow{display:grid;grid-template-columns:53px 20px 1fr;gap:9px;min-height:57px}.tlabel{text-align:right;padding-top:1px;font-size:12px;color:#98778a}.rail{display:flex;align-items:center;flex-direction:column;min-height:57px}.rail:before{content:"";width:2px;background:#dcb4ca;flex:1;min-height:13px}.dot{width:11px;height:11px;border-radius:50%;border:2px solid #d78fb2;background:#fffafd;flex-shrink:0}.rail:after{content:"";width:2px;background:#dcb4ca;flex:1;min-height:13px}.eventlist{padding:0 0 9px}.event{border-radius:12px;padding:9px 10px;margin-bottom:5px;border:1px solid var(--line);background:#fff;display:flex;gap:9px;align-items:flex-start}.eventmain{flex:1;min-width:0}.eventtitle{font-size:14px;font-weight:700}.eventmeta{font-size:12px;color:#95788a;margin-top:4px;overflow-wrap:anywhere}.checkrow{display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap}
+.subjectcard,.statcard{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:9px}.subjectrow{display:flex;align-items:center;gap:9px}.colorinput{width:42px;height:39px;border:0;padding:2px;background:transparent}.subjectname{flex:1;min-width:0}.subjectname input{width:100%;padding:9px;border:1px solid var(--line);border-radius:10px;color:var(--ink)}
+.statcontrols{display:flex;gap:7px;margin-bottom:12px}.statcontrols select{flex:1}.statbig{font-size:25px;font-weight:800;color:#b95e8b}.barrow{margin:12px 0}.barlabel{display:flex;justify-content:space-between;gap:8px;font-size:13px;margin-bottom:5px}.bartrack{height:10px;border-radius:10px;background:#f3e8ee;overflow:hidden}.barfill{height:100%;border-radius:10px}.empty{padding:22px;text-align:center;background:#fff;border:1px dashed var(--line);border-radius:15px;color:#a48b9b;font-size:13px}
+footer{text-align:center;color:#b58ba1;font-size:11px;padding:22px 0 4px}
+@media(min-width:600px){.app{padding-top:24px}.editorgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.slot{margin-bottom:10px}.slothead .subject{min-width:0}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand">
+  <label class="avatar" title="好きな画像に変更"><img id="avatarImg" alt="" hidden><span id="avatarPlaceholder">画像を選ぶ<br>＋</span><input id="avatarFile" type="file" accept="image/*" aria-label="タイトル横の画像を変更"></label>
+  <div><h1>Study♡Room</h1><div class="sub">little steps, big dreams ✧</div><div class="sub">画像をタップして好きな写真に変更</div></div>
+ </div>
+ <div class="toprow"><input class="date" id="currentDate" type="date" aria-label="記録する日付"></div>
+ <div class="progress">
+  <div class="progressline"><div><div class="sub">TODAY'S ACHIEVEMENT</div><div class="percent" id="progressText">0%</div></div><div style="text-align:right"><b id="doneCount">0/0</b><div class="sub">完了した予定</div></div></div>
+  <div class="hearts" id="heartRow" aria-label="達成率"></div>
+ </div>
+</header>
+<nav>
+ <button class="navbtn active" data-page="edit">✎ 編集</button>
+ <button class="navbtn" data-page="timeline">♡ 決定</button>
+ <button class="navbtn" data-page="subjects">🎀 教科カラー</button>
+ <button class="navbtn" data-page="stats">✧ 勉強時間</button>
+</nav>
+<section class="page active" id="page-edit">
+ <div class="sectionhead"><h2>✎ Edit Schedule</h2><button class="btn small" id="toggleEmpty">空欄を非表示</button></div>
+ <p class="hint">時間枠は最初から24時間分！科目と教材を直接入力してね。終了時間は次の正時までの1時間として集計します。</p>
+ <div id="editor" class="editorgrid"></div>
+ <div class="actions"><button class="btn primary" id="toTimeline">決定画面を見る ♡</button></div>
+</section>
+<section class="page" id="page-timeline">
+ <div class="sectionhead"><h2>♡ Daily Timeline</h2><button class="btn" id="backEdit">✎ 編集に戻る</button></div>
+ <p class="hint">入力した予定だけを縦一本のタイムラインに表示。ここからも完了チェックを変更できるよ。</p>
+ <div id="timeline" class="timeline"></div>
+</section>
+<section class="page" id="page-subjects">
+ <div class="sectionhead"><h2>🎀 教科カラー設定</h2></div>
+ <p class="hint">このページはタイムテーブルとは別ページ。教科名と色を自由に設定できます。設定した色は編集画面・決定画面・集計に反映されます。</p>
+ <div id="subjectsList"></div>
+ <div class="actions"><button class="btn primary" id="addSubject">＋ 教科を追加</button><button class="btn" id="resetSubjects">初期設定に戻す</button></div>
+</section>
+<section class="page" id="page-stats">
+ <div class="sectionhead"><h2>✧ Study Statistics</h2></div>
+ <p class="hint">完了チェックした時間枠を、教科ごとに日・週・月単位で集計します。1枠＝1時間として計算。</p>
+ <div class="statcontrols">
+  <select id="statPeriod" class="field" aria-label="集計期間"><option value="day">日ごと</option><option value="week">週ごと</option><option value="month">月ごと</option></select>
+  <input id="statDate" type="date" class="field" aria-label="集計の基準日">
+ </div>
+ <div class="statcard"><div class="sub">TOTAL STUDY TIME</div><div class="statbig" id="totalHours">0時間</div><div class="sub" id="statRange"></div></div>
+ <div id="statsList"></div>
+</section>
+<footer>୨୧ ── ♡ ── ୨୧<br>YOUR DREAMS ARE WORTH THE WORK ✧</footer>
+</div>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const today=new Date();const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+$('currentDate').value=iso(today);$('statDate').value=iso(today);
+const defaultSubjects=[
+ {name:'英語',color:'#F3B5D0'},{name:'国語',color:'#C8B8E8'},{name:'日本史',color:'#A9D6C5'},
+ {name:'世界史',color:'#AFCBEF'},{name:'数学',color:'#F4D18C'},{name:'理科',color:'#A9D9E8'},{name:'その他',color:'#D5D0D5'}
+];
+let subjects=load('sr_subjects',defaultSubjects);
+let records=load('sr_records',{});
+let hideEmpty=false;
+let activePage='edit';
+function load(k,fallback){try{const v=localStorage.getItem(k);return v?JSON.parse(v):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
+function save(){try{localStorage.setItem('sr_records',JSON.stringify(records));localStorage.setItem('sr_subjects',JSON.stringify(subjects))}catch(e){alert('保存容量がいっぱいの可能性があります。画像を小さくして再度お試しください。')}}
+function dateKey(){return $('currentDate').value||iso(new Date())}
+function blankSlots(){return Array.from({length:24},(_,hour)=>({hour,subject:'',material:'',done:false}))}
+function daySlots(date){if(!records[date])records[date]=blankSlots();let old=records[date];records[date]=Array.from({length:24},(_,hour)=>old.find(s=>Number(s.hour)===hour)||({hour,subject:'',material:'',done:false}));return records[date]}
+function currentSlots(){return daySlots(dateKey())}
+function subjColor(name){const found=subjects.find(s=>s.name===name);return found?found.color:'#D5D0D5'}
+function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderHearts(){const s=currentSlots(),planned=s.filter(x=>x.subject.trim()||x.material.trim()),done=planned.filter(x=>x.done).length,rate=planned.length?Math.round(done/planned.length*100):0;$('progressText').textContent=rate+'%';$('doneCount').textContent=done+'/'+planned.length;$('heartRow').innerHTML=Array.from({length:10},(_,i)=>`<span class="heart ${i<Math.round(rate/10)?'on':''}">♡</span>`).join('')}
+function renderEditor(){const s=currentSlots();$('editor').innerHTML=s.map(x=>{if(hideEmpty&&!x.subject&&!x.material&&!x.done)return '';const c=subjColor(x.subject);return `<div class="slot" style="border-left:4px solid ${c}"><div class="slothead"><span class="timepill">${String(x.hour).padStart(2,'0')}:00</span><input class="subject" type="text" data-hour="${x.hour}" data-field="subject" list="subjectOptions" placeholder="科目（例：英語）" value="${escapeHTML(x.subject)}"><input class="donecheck" type="checkbox" data-hour="${x.hour}" data-field="done" ${x.done?'checked':''} aria-label="完了"></div><datalist id="subjectOptions">${subjects.map(a=>`<option value="${escapeHTML(a.name)}">`).join('')}</datalist><input type="text" data-hour="${x.hour}" data-field="material" placeholder="教材・テキスト・ページ" value="${escapeHTML(x.material)}"><div class="slotfoot"><span>${x.done?'♡ 完了！':'♡ STUDY TIME'}</span><span>${String(x.hour).padStart(2,'0')}:00–${String(x.hour+1).padStart(2,'0')}:00</span></div></div>`}).join('')}
+function renderTimeline(){const s=currentSlots();let out='';for(let h=0;h<=24;h++){const x=s[h];out+=`<div class="trow"><div class="tlabel">${String(h).padStart(2,'0')}:00</div><div class="rail"><span class="dot"></span></div><div class="eventlist">`;if(x&&(x.subject.trim()||x.material.trim())){const c=subjColor(x.subject);out+=`<div class="event" style="background:${hexMix(c,'#ffffff',.76)};border-color:${hexMix(c,'#ffffff',.3)}"><div class="eventmain"><div class="eventtitle">${escapeHTML(x.subject||'科目未入力')}</div><div class="eventmeta">${escapeHTML(x.material||'教材未入力')}</div><div class="eventmeta">${String(h).padStart(2,'0')}:00–${String(h+1).padStart(2,'0')}:00</div></div><label class="checkrow"><input class="donecheck" type="checkbox" data-hour="${h}" data-field="done" ${x.done?'checked':''}>完了</label></div>`}out+='</div></div>'} $('timeline').innerHTML=out}
+function hexMix(hex,other,amount){const a=hex.replace('#',''),b=other.replace('#','');if(a.length!==6)return other;let r='';for(let i=0;i<3;i++){const v=Math.round(parseInt(a.slice(i*2,i*2+2),16)*amount+parseInt(b.slice(i*2,i*2+2),16)*(1-amount));r+=v.toString(16).padStart(2,'0')}return '#'+r}
+function renderSubjects(){$('subjectsList').innerHTML=subjects.map((s,i)=>`<div class="subjectcard"><div class="subjectrow"><input class="colorinput" type="color" data-subject-color="${i}" value="${s.color}" aria-label="${escapeHTML(s.name)}の色"><div class="subjectname"><input type="text" data-subject-name="${i}" value="${escapeHTML(s.name)}" aria-label="教科名"></div><button class="btn small" data-remove-subject="${i}">削除</button></div><div class="sub" style="margin-top:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${s.color};margin-right:5px"></span>この色が予定の枠・タイムラインに反映されます</div></div>`).join('')}
+function dateObj(v){return new Date((v||iso(new Date()))+'T12:00:00')}
+function startOfWeek(d){const x=new Date(d);const day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return x}
+function renderStats(){const period=$('statPeriod').value,base=dateObj($('statDate').value),date=iso(base);let from,to,label;if(period==='day'){from=date;to=date;label=date}else if(period==='week'){const a=startOfWeek(base),b=new Date(a);b.setDate(a.getDate()+6);from=iso(a);to=iso(b);label=from+' 〜 '+to}else{from=`${base.getFullYear()}-${String(base.getMonth()+1).padStart(2,'0')}-01`;to=iso(new Date(base.getFullYear(),base.getMonth()+1,0));label=`${base.getFullYear()}年${base.getMonth()+1}月`}
+const sums={};let total=0;Object.keys(records).forEach(d=>{if(d<from||d>to)return;(records[d]||[]).forEach(x=>{if(x.done&&(x.subject.trim()||x.material.trim())){const name=x.subject.trim()||'科目未入力';sums[name]=(sums[name]||0)+1;total++}})});$('totalHours').textContent=total+'時間';$('statRange').textContent=label+' の完了済み勉強時間';const entries=Object.entries(sums).sort((a,b)=>b[1]-a[1]);$('statsList').innerHTML=entries.length?entries.map(([name,n])=>`<div class="barrow"><div class="barlabel"><span>${escapeHTML(name)}</span><b>${n}時間</b></div><div class="bartrack"><div class="barfill" style="width:${total?n/total*100:0}%;background:${subjColor(name)}"></div></div></div>`).join(''):'<div class="empty">この期間に完了した勉強記録はまだありません。<br>時間割で完了にチェックしてね ♡</div>'}
+function renderAll(){renderHearts();renderEditor();renderTimeline();renderSubjects();renderStats()}
+function setPage(p){activePage=p;document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+p));document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));if(p==='timeline')renderTimeline();if(p==='stats')renderStats();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+$('toTimeline').onclick=()=>setPage('timeline');$('backEdit').onclick=()=>setPage('edit');
+$('toggleEmpty').onclick=()=>{hideEmpty=!hideEmpty;$('toggleEmpty').textContent=hideEmpty?'全時間を表示':'空欄を非表示';renderEditor()};
+$('currentDate').addEventListener('change',()=>{renderAll()});
+$('statDate').addEventListener('change',renderStats);$('statPeriod').addEventListener('change',renderStats);
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.hour!==undefined&&t.dataset.field&&t.dataset.field!=='done'){const h=Number(t.dataset.hour),field=t.dataset.field;currentSlots()[h][field]=t.value;save();renderHearts();if(field==='subject'){const pos=t.selectionStart;renderEditor();const target=document.querySelector(`#editor [data-hour="${h}"][data-field="subject"]`);if(target){target.focus();try{target.setSelectionRange(pos,pos)}catch(_){}}renderTimeline()}else renderTimeline();}else if(t.dataset.subjectName!==undefined){subjects[Number(t.dataset.subjectName)].name=t.value;save();renderTimeline();renderStats()}else if(t.dataset.subjectColor!==undefined){subjects[Number(t.dataset.subjectColor)].color=t.value;save();renderEditor();renderTimeline();renderStats()}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.hour!==undefined&&t.dataset.field==='done'){const h=Number(t.dataset.hour);currentSlots()[h].done=t.checked;save();renderAll()}else if(t.dataset.subjectColor!==undefined){save();renderAll()}});
+$('addSubject').onclick=()=>{subjects.push({name:'新しい教科',color:'#E8C4D8'});save();renderSubjects()};
+$('resetSubjects').onclick=()=>{if(confirm('教科カラーを初期設定に戻しますか？')){subjects=JSON.parse(JSON.stringify(defaultSubjects));save();renderAll()}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-remove-subject]');if(b){const i=Number(b.dataset.removeSubject);if(confirm(`「${subjects[i].name}」を教科一覧から削除しますか？予定の記録自体は残ります。`)){subjects.splice(i,1);save();renderAll()}}});
+$('avatarFile').addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){alert('画像ファイルを選んでね');return}const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');const max=320;const scale=Math.min(1,max/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);const data=canvas.toDataURL('image/jpeg',.82);$('avatarImg').src=data;$('avatarImg').hidden=false;$('avatarPlaceholder').hidden=true;try{localStorage.setItem('sr_avatar',data)}catch(err){alert('画像が大きすぎて保存できませんでした。別の画像を試してね。')}};img.src=reader.result};reader.readAsDataURL(file)});
+try{const avatar=localStorage.getItem('sr_avatar');if(avatar){$('avatarImg').src=avatar;$('avatarImg').hidden=false;$('avatarPlaceholder').hidden=true}}catch(e){}
+renderAll();
+})();
+</script>
+</body>
+</html>
